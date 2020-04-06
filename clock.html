@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JS + CSS Clock</title>
+</head>
+<body>
+
+    <div class="clock">
+      <div class="hour">
+        <div class="hr" id="hr"></div>
+      </div>
+      <div class="min">
+        <div class="mn" id="mn"></div>
+      </div>
+      <div class="second">
+        <div class="sec" id="sec"></div>
+      </div>
+    </div>
+
+  <style>
+    *{
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+    body
+    {
+      height: 100vh;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #68a4ff;
+    }
+    .clock
+    {
+      display: flex;
+      width: 350px;
+      height: 350px;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+      background-color: white;
+      border:20px solid #fff;
+     box-shadow: inset 0 0 30px rgba(0, 0, 0, .1),
+     inset 0 20px 20px rgba(0, 0, 0, .2),
+     inset 0 0 0 4px rgba(255, 255, 255, 1);
+     background: #fff url("clock.png");
+     background-size: cover;
+    }
+    .clock::before
+    {
+      content: '';
+      display: block;
+      width: 15px;
+      height: 15px;
+      background-color: gray;
+      border-radius: 50%;
+      border: 2px solid white;
+      z-index: 10000;
+    }
+    .hour,.min,.second
+    {
+      position: absolute;
+    }
+    .hour,.hr
+    {
+      width: 160px;
+      height: 160px;
+    }
+    .min,.mn
+    {
+      width: 190px;
+      height: 190px;
+    }
+    .second,.sec
+    {
+      width: 230px;
+      height: 230px;
+    }
+    .hr,.mn,.sec
+    {
+      position: absolute;
+      display: flex;
+      justify-content: center;
+      border-radius: 50%;
+    }
+    .hr::before
+    {
+      content: '';
+      width:8px;
+      height: 80px;
+      background-color: gray;
+      position: absolute;
+      z-index: 10;
+      border-radius: 6px 6px 0 0;
+    }
+    .mn::before
+    {
+      content: '';
+      width:4px;
+      height: 90px;
+      background-color: #d6d6d6;
+      position: absolute;
+      z-index: 11;
+      border-radius: 6px 6px 0 0;
+    }
+    .sec::before
+    {
+      content: '';
+      width:2px;
+      height: 150px;
+      background-color: red;
+      position: absolute;
+      z-index: 12;
+      border-radius: 6px 6px 0 0;
+    }
+  </style>
+  <script>
+  ;(function()
+  {
+    function getClock()
+    {
+      let secondpin=document.querySelector(".sec");
+      let minpin=document.querySelector(".min");
+      let hourpin=document.querySelector(".hr");
+
+      let time=new Date();
+      let second=time.getSeconds()*6;//360/60
+      let min=time.getMinutes()*6+time.getSeconds()*6/60;//360/60
+      let hour=time.getHours()*30+time.getMinutes()*30/60;;//360/12
+      secondpin.style.transform=`rotate(${second}deg)`;
+      minpin.style.transform=`rotate(${min}deg)`;
+      hourpin.style.transform=`rotate(${hour}deg)`;
+
+    }
+    
+
+    setInterval(getClock,1000);
+
+
+
+
+  })();
+
+  </script>
+</body>
+</html>
